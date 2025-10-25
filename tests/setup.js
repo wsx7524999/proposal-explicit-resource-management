@@ -9,13 +9,11 @@
 
 // Define Symbol.dispose if not available (for testing purposes)
 if (typeof Symbol.dispose === 'undefined') {
-  // @ts-ignore
   Symbol.dispose = Symbol('Symbol.dispose');
 }
 
 // Define Symbol.asyncDispose if not available (for testing purposes)
 if (typeof Symbol.asyncDispose === 'undefined') {
-  // @ts-ignore
   Symbol.asyncDispose = Symbol('Symbol.asyncDispose');
 }
 
