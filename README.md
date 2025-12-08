@@ -4,6 +4,15 @@
 > proposal. This proposal repository should be used for further discussion of both sync and async of explicit resource
 > management.
 
+## Quick Links
+
+- 📖 [Full Specification](https://arai-a.github.io/ecma262-compare/?pr=3000)
+- 💡 [Usage Examples](./examples/) - Practical demonstrations of the proposal
+- 🧪 [Tests](./tests/) - Test suite for validating behavior
+- 🤝 [Contributing](#contributing) - How to contribute to this proposal
+
+## Overview
+
 This proposal intends to address a common pattern in software development regarding
 the lifetime and management of various resources (memory, I/O, etc.). This pattern
 generally includes the allocation of a resource and the ability to explicitly
@@ -281,6 +290,26 @@ This proposal is motivated by a number of cases:
     } // unlocks 'm'
   }
   ```
+
+## Benefits of This Proposal
+
+The explicit resource management proposal provides several key benefits:
+
+1. **Automatic Cleanup**: Resources are automatically disposed when they go out of scope, eliminating the need for manual cleanup and reducing the risk of resource leaks.
+
+2. **Exception Safety**: Resources are guaranteed to be disposed even when exceptions occur, ensuring proper cleanup in all code paths.
+
+3. **Simplified Code**: Reduces boilerplate code compared to try-finally blocks, making resource management more concise and readable.
+
+4. **Consistent Pattern**: Provides a standard pattern for resource management across the JavaScript ecosystem, similar to patterns in C#, Java, and Python.
+
+5. **Multiple Resources**: Handles multiple resources with correct disposal order automatically (last-in, first-out), preventing resource dependency issues.
+
+6. **Async Support**: First-class support for asynchronous resource disposal with `await using`, enabling proper cleanup of async resources like database connections and streams.
+
+7. **Error Aggregation**: Properly handles and reports errors that occur during disposal using `SuppressedError`, ensuring no errors are silently lost.
+
+8. **Interoperability**: Works seamlessly with existing JavaScript patterns and can be adopted incrementally through the `DisposableStack` and `AsyncDisposableStack` utilities.
 
 # Prior Art
 
@@ -1840,6 +1869,128 @@ suggestions for consideration. The actual implementation is at the discretion of
   - [Conclusion](https://github.com/tc39/notes/blob/main/meetings/2023-03/mar-23.md#conclusion-5)
     - Stage 3, conditionally on final review of cover grammar by Waldemar Horwat.
     - Consensus on normative change to remove `await` identifier restriction for `using` declarations.
+
+# Contributing
+
+We welcome contributions to help improve this proposal and its documentation! Here's how you can contribute:
+
+## Ways to Contribute
+
+### 1. Reporting Issues
+If you find bugs, inconsistencies, or have suggestions for improvements:
+- Check the [existing issues](https://github.com/tc39/proposal-explicit-resource-management/issues) to avoid duplicates
+- Open a new issue with a clear description of the problem or suggestion
+- Provide examples and use cases when applicable
+
+### 2. Documentation
+Help improve the documentation by:
+- Fixing typos or clarifying explanations
+- Adding or improving examples in the [`examples/`](./examples/) directory
+- Enhancing the README with better explanations or additional use cases
+- Improving code comments and inline documentation
+
+### 3. Examples and Use Cases
+Contribute practical examples demonstrating the proposal:
+- Add new example files to the [`examples/`](./examples/) directory
+- Show real-world scenarios where explicit resource management is beneficial
+- Demonstrate integration with existing APIs and patterns
+- Follow the structure of existing examples
+
+### 4. Tests
+Enhance the test suite:
+- Add tests to the [`tests/`](./tests/) directory
+- Cover edge cases and boundary conditions
+- Test integration patterns and complex scenarios
+- Ensure tests follow Jest conventions and existing patterns
+
+### 5. Specification Feedback
+Provide feedback on the specification:
+- Review the [specification text](https://arai-a.github.io/ecma262-compare/?pr=3000)
+- Participate in discussions on GitHub issues
+- Share insights from implementation experience
+- Suggest improvements to the API design
+
+## Development Setup
+
+### Prerequisites
+- Node.js (version 18.x or higher recommended)
+- npm (comes with Node.js)
+
+### Getting Started
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/tc39/proposal-explicit-resource-management.git
+   cd proposal-explicit-resource-management
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install --legacy-peer-deps
+   ```
+
+3. **Build the specification**
+   ```bash
+   npm run compile
+   ```
+   The compiled specification will be in the `docs/` directory.
+
+4. **Run tests**
+   ```bash
+   npm test
+   ```
+
+5. **Run tests in watch mode** (for development)
+   ```bash
+   npm run test:watch
+   ```
+
+6. **Start development server** (to preview spec changes)
+   ```bash
+   npm start
+   ```
+   The specification will be available at `http://localhost:8080`
+
+## Pull Request Guidelines
+
+When submitting a pull request:
+
+1. **Create a focused PR**: Each PR should address a single concern
+2. **Write clear commit messages**: Describe what changed and why
+3. **Update documentation**: If you change functionality, update relevant docs
+4. **Add tests**: Include tests for new functionality or bug fixes
+5. **Follow existing conventions**: Match the style and structure of existing code
+6. **Test your changes**: Ensure all tests pass before submitting
+7. **Update the README**: If adding new features, document them
+
+### PR Checklist
+- [ ] Code follows existing style and conventions
+- [ ] Tests added/updated and passing
+- [ ] Documentation updated (if applicable)
+- [ ] Examples added/updated (if applicable)
+- [ ] Specification compiles without errors
+- [ ] All CI checks pass
+
+## Code of Conduct
+
+This project follows the [TC39 Code of Conduct](https://tc39.es/code-of-conduct/). Please be respectful and constructive in all interactions.
+
+## Questions?
+
+- For general questions, open a [GitHub Discussion](https://github.com/tc39/proposal-explicit-resource-management/discussions)
+- For bugs or feature requests, open an [issue](https://github.com/tc39/proposal-explicit-resource-management/issues)
+- For specification questions, refer to the [TC39 process document](https://tc39.es/process-document/)
+
+## License
+
+Contributions are made under the same license as the specification itself. See [LICENSE](./LICENSE) for details.
+
+## Useful Resources
+
+- [TC39 Process Document](https://tc39.es/process-document/)
+- [ECMAScript Specification](https://tc39.es/ecma262/)
+- [How to Write TC39 Proposals](https://github.com/tc39/how-we-work/blob/main/how-to-write-a-proposal.md)
+- [Test262](https://github.com/tc39/test262) - ECMAScript test suite
 
 # TODO
 
